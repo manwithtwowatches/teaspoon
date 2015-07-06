@@ -28,7 +28,7 @@
             <h1><%= link_to suite.name, teaspoon.suite_path(suite.name) %></h1>
             <ul class="file">
               <% for file in suite.spec_files %>
-                <li><%= link_to file[:name], teaspoon.suite_path(suite.name, file: file[:path]) %></li>
+                <li><%= link_to file[:name], teaspoon.suite_path(suite.name, suite.config.url_options.merge!(file: file[:path])) %></li>
               <% end %>
             </ul>
           </li>

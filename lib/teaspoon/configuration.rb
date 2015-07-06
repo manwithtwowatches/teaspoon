@@ -62,7 +62,7 @@ module Teaspoon
     class Suite
       attr_accessor :matcher, :helper, :javascripts, :stylesheets,
                     :boot_partial, :body_partial,
-                    :hooks, :expand_assets
+                    :hooks, :expand_assets, :url_options
 
       def initialize(name = nil)
         @matcher       = "{spec/javascripts,app/assets}/**/*_spec.{js,js.coffee,coffee}"
@@ -75,6 +75,7 @@ module Teaspoon
 
         @hooks         = Hash.new { |h, k| h[k] = [] }
         @expand_assets = true
+        @url_options   = Hash.new { |h, k| h[k] = [] }
 
         default = Teaspoon.configuration.suite_configs["default"]
         instance_eval(&default[:block]) if default
@@ -97,6 +98,10 @@ module Teaspoon
 
       def hook(group = :default, &block)
         @hooks[group.to_s] << block
+      end
+
+      def url_option(k, v)
+        @url_options[k] = v
       end
     end
 
