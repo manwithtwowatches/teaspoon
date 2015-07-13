@@ -102,6 +102,7 @@ module Teaspoon
     def url_for(suite, console = true)
       url = [base_url_for(suite), filter(suite)].compact.join("?")
       url += "#{(url.include?('?') ? '&' : '?')}reporter=Console" if console
+      url += "#{(url.include?('?') ? '&' : '?')}mode=headless" if console # MPJS Hack alert! We need the browser to run in headless mode.
       url
     end
 
